@@ -1,0 +1,321 @@
+<html
+    >
+
+<head>
+    <title>teste microgeo</title>
+    <meta data-n-head="ssr" charset="utf-8">
+    <meta data-n-head="ssr" name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.9.1.min.js"></script>
+
+    <script type="text/javascript">
+    
+        window.addEventListener("load", mediaSizer);
+        //window.addEventListener("resize", mediaSizer);
+        // Listeners that will react when the page first loads or is resized.
+        // If any of these events take place the mediaSizer() function executes.
+    
+        var vizList = [
+    
+        "https://demo.tableau.com/t/LuizOliveira/views/resultado_16757214907420/AcompanhamentodeResultado",
+    "https://demo.tableau.com/t/LuizOliveira/views/HUMANRESOURCES-HRExpensesDashboardBrasil_16757214908260/Cockpit",
+        "https://demo.tableau.com/t/LuizOliveira/views/PrevistoxRealizado_16757214907290/AnliseMensal",
+        "https://demo.tableau.com/t/LuizOliveira/views/FinanasCorporativas-PainelDemonstrativoFinanceiro_16757214937510/Cockpit-Finance",
+
+        "https://demo.tableau.com/t/LuizOliveira/views/ExecutiveKPIDashboard_16757214914970/ExecutiveDashboard",
+        "https://demo.tableau.com/t/LuizOliveira/views/2-Template_16757214911700/Template",
+        "https://demo.tableau.com/t/LuizOliveira/views/3-Exemplo_16757214907190/DashExemplo",
+
+        "https://public.tableau.com/views/Howhastheworldchangedsince1962/WorldIndicators?:language=en-US&:display_count=n&:origin=viz_share_link",
+
+        "https://public.tableau.com/views/TheTableauChartCatalog/TableauChartExamples",
+
+        "https://public.tableau.com/views/SalesDashboardautomaticallycreated_0/Home?:language=en-US&:toolbar=n&:display_count=n&:origin=viz_share_link",
+        "https://public.tableau.com/views/USAAgricultureAlert/USAAgriculture-IrovViz?:language=en-US&:display_count=n&:origin=viz_share_link",
+        
+        "https://demo.tableau.com/t/LuizOliveira/views/PROCUREMENT-ContractManagementDashboard_16757214934190/Home",
+        "https://demo.tableau.com/t/LuizOliveira/views/1-XX-DesigningEffectiveDashboards_16609286511730/Intro",
+        "https://demo.tableau.com/t/LuizOliveira/views/Embedded_Analytics_DemoPT-BR3/Introduo",
+        "https://demo.tableau.com/t/LuizOliveira/views/heatmap_taxi_howto/Dashboard1",
+        "https://demo.tableau.com/t/LuizOliveira/views/GroceriesAnalysis/BufferCalculations"
+            
+    
+    
+        ];
+        // Array of Tableau Server URLs for dashboard or sheet navigation.
+    
+        var viz,
+            vizLen = vizList.length,
+            vizCount = 0,
+            devType,
+            vHideTabs = true,
+                vHideToolbar = true;
+        var options = {
+            device: devType,
+        };
+    
+    
+        function mediaSizer() {
+            // Determines the correct viz layout according to screen sizes.
+            if (window.matchMedia("(max-width: 480px)").matches) {
+                //alert("I am a phone layout!");
+                devType = 'phone';
+                vWidth = 450;
+                vHeight = 2000;
+                //options.device = 'phone';
+            } else if (window.matchMedia("(max-width: 980px)").matches) {
+                //alert("I am a tablet layout!");
+                devType = 'tablet';
+                vWidth = 980;
+                //options.device = 'tablet';
+            } else {
+                //alert("I am a desktop layout!");
+                devType = 'desktop';
+                vWidth = 1666;
+                vHeight = 1000;
+                //options.device = 'desktop';
+            }
+            console.log("devtype: " + devType)
+            console.log("launch0")
+            vHeight = 900;
+            launchViz(0);
+            console.log("launch1")
+            launchViz(1);
+          
+            console.log("launch2")
+            vHeight = 1100;
+            launchViz(2);
+            console.log("launch3")
+            launchViz(3);
+            vHeight = 1800;
+            launchViz(4);
+            vHeight = 1100;
+            vHideToolbar=true;
+                vHideTabs= true;
+            launchViz(5);
+            launchViz(6);
+            vHeight = 1300;
+            launchViz(7);
+            vHeight = 8000;
+            
+            launchViz(8);
+            vHeight = 1300;
+            
+            vHideToolbar=false;
+                vHideTabs= false;
+            launchViz(9);
+            vHeight = 800;
+            launchViz(10);
+            vHeight = 1000;
+            launchViz(11);
+            launchViz(12);
+            launchViz(13);
+    
+            // Launches the viz again with the new sizing at the current index of vizList.
+        }
+    
+    
+        function launchViz(vizNav) {
+            // JS object targeting a div in the html document. (vizNav) will pass navigation values to move back and forth across vizList.
+            console.log("vizContainer" + vizNav)
+            console.log("devtype: " + devType)
+            var vizDiv = document.getElementById("vizContainer" + vizNav),
+                // Will embed the visualization on a div with id="VizContainer"
+                options = {
+                    device: devType,
+                    width: vWidth,
+                    height: vHeight,
+                    hideTabs: vHideTabs,
+                    hideToolbar: vHideToolbar,
+                    onFirstInteractive: function () {
+                        listenToMarksSelection();
+                    }
+                };
+    
+    
+            var vizURL = vizList[vizNav];
+            // Dynamic URL returning the string from vizList at index = vizNav (viz to be displayed).
+    
+            try {
+                // Initializes the viz from the array with desired options. 
+                viz = new tableau.Viz(vizDiv, vizURL, options);
+                if (!viz) throw 'viz not initialized'
+            }
+            catch (err) {
+                alert(err);
+            }
+            finally {
+                console.log('whatever')
+                console.count('initViz')
+            }
+    
+        }
+    
+    </script>
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body style="--scroll-amount:0;" >
+
+
+
+
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Deste ponto para baixo deste microsite, apresentaremos vários dashboards somente como inspiração sobre as possibilidades que você terá a sua disposição com o Tableau.</p>
+                                                <p> Caso esteja visualizando no celular, talvez alguns não tenham sido criados para este tipo de visualização. </p>
+                                                <p> Realizamos uma cópia do código fonte de seu website para abstrair o uso do Tableau Embedded e você pode interagir com os dashboards, mas as demais funções do site não foram replicadas. </p>    
+                                            <p> - </p>
+                                            <p> Exemplo visual de acompanhamento de resultados utilizando as marcas da Softys. </p>
+                                            <p> - </p>
+                                            <div id="vizContainer0"></div>
+                                        </div>
+                                    </div>
+                                
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de acompanhamento de despesas para RH. Feito com base nos Accelerators Tableau. Customizado para Softys </p>
+                                            <p> - </p>
+                                            <div id="vizContainer1"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de acompanhamentos de custo de projetos comparando previsto e realizado. Conceito de guided analytics. Clique nas barras para navegar. Customizado para Softys </p>
+                                            <p> - </p>
+                                            <div id="vizContainer2"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de demonstrativo financeiro feito com base nos Accelerators Tableau. Customizado para Softys </p>
+                                            <p> - </p>
+                                            <div id="vizContainer3"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard executivo com indicadores.  </p>
+                                            <p> - </p>
+                                            <div id="vizContainer4"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de um template para uso interno. Customizado para Softys </p>
+                                            <p> - </p>
+                                            <div id="vizContainer5"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo do uso do template. Customizado para Softys </p>
+                                            <p> - </p>
+                                            <div id="vizContainer6"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard com animação. Clique no botao de play na forma de um triangulo no canto inferior direito para ver a animação. Disponível no Tableau Public </p>
+                                            <p> - </p>
+                                            <div id="vizContainer7"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Somente alguns exemplos de gráficos possíveis no Tableau para inspiração da comunidade. Disponível no Tableau Public. Temos milhares de outros conteúdos como esse disponibilizados pela comunidade. </p>
+                                            <p> - </p>
+                                            <div id="vizContainer8"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard de Vendas. Genérico disponível no Tableau Public </p>
+                                            <p> - </p>
+                                            <div id="vizContainer9"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de Layout de uma loja. Cada retangulo colorido representa uma prateleira da loja. Genérico disponível no Tableau Public </p>
+                                            <p> - </p>
+                                            <div id="vizContainer10"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard para gerenciamento de contratos. Genérico disponível no Tableau Public </p>
+                                            <p> - </p>
+                                            <div id="vizContainer11"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard para webinar sobre criação de dashboards mais efetivos </p>
+                                            <p> - </p>
+                                            <div id="vizContainer12"></div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <div style="display: inline-block;">
+                                            <p> - </p>
+                                            <p> Exemplo de dashboard para Webinar sobre Embedded Analytics </p>
+                                            <p> - </p>
+                                            <div id="vizContainer13"></div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </main>
+
+
+
+</body>
+
+</html>
